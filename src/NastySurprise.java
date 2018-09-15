@@ -1,5 +1,5 @@
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -10,10 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class NastySurprise implements MouseListener {
+public class NastySurprise implements ActionListener {
 
 	JButton b1 = new JButton("Trick");
 	JButton b2 = new JButton("Treat");
+	JFrame jframe = new JFrame();
+	JPanel panel = new JPanel();
 
 	public static void main(String[] args) {
 		NastySurprise ns = new NastySurprise();
@@ -22,16 +24,14 @@ public class NastySurprise implements MouseListener {
 
 	private void showButton() {
 		// TODO Auto-generated method stub
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		frame.add(panel);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		b1.addMouseListener(this);
-		b2.addMouseListener(this);
+		jframe.add(panel);
+		jframe.setVisible(true);
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		b1.addActionListener(this);
+		b2.addActionListener(this);
 		panel.add(b1);
 		panel.add(b2);
-		frame.pack();
+		jframe.pack();
 	}
 
 	private void showPictureFromInternet(String imageUrl) {
@@ -49,38 +49,15 @@ public class NastySurprise implements MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		JButton mouseClicked = (JButton) e.getSource();
-		if (mouseClicked.equals(b1)) {
-			showPictureFromInternet(
-					"https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi_xIOAxqzdAhUKCKwKHTMaCqcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DGw_xvtWJ6q0&psig=AOvVaw2Z-fPFyEIoGCYxr54l2KVh&ust=1536535189798438");
-		} else if (mouseClicked.equals(b2)) {
-			showPictureFromInternet(
-					"https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwirrbDu0KzdAhVFYK0KHZZfAo8QjRx6BAgBEAU&url=https%3A%2F%2Fwww.cubecraft.net%2Fthreads%2Fhappy-spooktober.164101%2F&psig=AOvVaw3pqaZ2RQwtb8oeY3ygikiU&ust=1536538158252897");
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton jbutton = (JButton) e.getSource();
+		if (jbutton == b1) {
+			showPictureFromInternet("https://ybxzcgnc7b-flywheel.netdna-ssl.com/wp-content/uploads/2017/11/cute.jpg");
+		} else if (jbutton == b2) {
+			showPictureFromInternet("http://www.likecovers.com/covers/original/big-scary-cute-domo.jpg?i");
 		}
+		jframe.pack();
 	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
 }
