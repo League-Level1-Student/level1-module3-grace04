@@ -1,8 +1,10 @@
+import java.applet.AudioClip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Random;
 
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -13,6 +15,8 @@ public class WhackAMole implements ActionListener {
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	int miss = 0;
+	int hit = 0;
+	Date timeAtStart = new Date();
 
 	public static void main(String[] args) {
 		WhackAMole wm = new WhackAMole();
@@ -42,9 +46,18 @@ public class WhackAMole implements ActionListener {
 		JButton buttonPressed = (JButton) e.getSource();
 		if (buttonPressed.getText().equals("mole!")) {
 			speak("Hit");
+			hit++;
+			playSound("shiny-objects.wav");
 		} else {
 			speak("Miss");
 			miss++;
+		}
+
+		if (hit == 10) {
+			JOptionPane.showMessageDialog(null, "You won!");
+			endGame(timeAtStart, hit);
+		} else if (miss == 5) {
+			JOptionPane.showMessageDialog(null, "You lost!");
 		}
 		frame.dispose();
 		frame = new JFrame();
@@ -65,4 +78,11 @@ public class WhackAMole implements ActionListener {
 		JOptionPane.showMessageDialog(null, "Your whack rate is "
 				+ ((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000.00 / molesWhacked) + " moles per second.");
 	}
+
+	private void playSound(String fileName) {
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource(fileName));
+		sound.play();
+	}
 }
+
+// https://docs.google.com/document/d/e/2PACX-1vT5XdG77iUZkibeAysT3aaSrGHJxjdPyKvxIt7TX7A2H9n9Uo7FKbO9VTgiQacxa2U3_FRb7oSOXepf/pub
